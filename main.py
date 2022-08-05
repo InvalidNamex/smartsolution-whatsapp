@@ -1,3 +1,5 @@
+import time
+
 import uvicorn
 from fastapi import FastAPI, Response, Request
 from twilio.twiml.messaging_response import MessagingResponse
@@ -38,6 +40,7 @@ async def receive_message_from_sandbox(request: Request):
                 reply(sender_number,
                       f'''تاريخ الفاتورة:{i['DueInvoiceDate']}\nمبلغ الفاتوة:{i['DueValue']}'''
                       )
+                time.sleep(1)
         else:
             response_msg.body('برجاء التأكد من البيانات المدخلة')
         return Response(content=str(resp), media_type="application/xml")
