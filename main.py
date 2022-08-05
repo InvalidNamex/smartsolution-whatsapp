@@ -17,6 +17,7 @@ async def receive_message_from_sandbox(request: Request):
     response_msg = resp.message()
     form = await request.form()
     message = form["Body"]
+    media = ['']
     sender_number = form["From"]
     url = "https://www.suezcanal.gov.eg:443/Arabic/_layouts/15/LINKDev.SCA.WaterServices/WaterServicesInfo.aspx/GetWaterServicesInfo"
     if '+' not in message.split():
@@ -53,6 +54,7 @@ def welcome_message(sender_number):
     client.messages.create(
         from_='whatsapp:+14155238886',
         body='للاستعلام عن فواتيرك برجاء ادخال رقم العداد + رقم المشترك \n مثال: 12345 + 123456',
+        media_url=['https://www.suezcanal.gov.eg/PublishingImages/Water_Receipt2.jpg'],
         to=sender_number
     )
 
